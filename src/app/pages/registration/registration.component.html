@@ -1,0 +1,24 @@
+
+<body>
+  <div class="wrapper">
+      <section class="form signup">
+          <header>Realtime Chat App</header>
+          <form action="#" [formGroup]="formModel" (ngSubmit)="onSubmit()">
+              <!-- <div class="error-text">This is an error message!</div> -->
+              <div class="name-details input">
+                  <div class="field">
+                      <label for="">Username</label>
+                      <input type="text" placeholder="Nico, Eugene etc." formControlName="username">
+                  </div>
+                  <!-- <div class="field input">
+                      <label for="">Chat Room</label>
+                      <input type="text"  formControlName="chatRoom">
+                  </div> -->
+                  <div class="field button">
+                      <input type="submit" value="Enter Chatroom">
+                  </div>
+              </div>
+          </form>
+      </section>
+  </div>
+</body>

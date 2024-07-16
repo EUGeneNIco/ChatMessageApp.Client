@@ -1,0 +1,232 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: #f7f7f7;
+}
+
+.wrapper {
+  background: #fff;
+  width: 450px;
+  border-radius: 16px;
+  box-shadow: 0 0 128px 0 rgba (0, 0, 0.1), 0 32px 64px -48px rgba(0, 0, 0.5);
+}
+
+.form {
+  padding: 25px 30px;
+}
+
+.form header {
+  font-size: 25px;
+  font-weight: 600;
+  padding: 10px;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.form form {
+  margin: 20px 0;
+}
+
+.form form .error-text {
+  color: #721c24;
+  background: #f8d7da;
+  padding: 8px 10px;
+  text-align: center;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  border: 1px solid #f5c6cb;
+}
+
+.form form .field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.form form .input input {
+  height: 40px;
+  width: 100%;
+  font-size: 16px;
+  padding: 0 10px;
+}
+
+.form form .field label {
+  margin-bottom: 2px;
+}
+
+.form form .field input {
+  outline: none;
+}
+
+.form form .input input {
+  height: 40px;
+  width: 100%;
+  font-size: 16px;
+  padding: 0 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.form form .button input {
+  margin-top: 13px;
+  height: 45px;
+  border: none;
+  font-size: 17px;
+  font-weight: 500;
+  background: #333;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.form .link {
+  text-align: center;
+  margin: 10px 0;
+  font-size: 17px;
+}
+
+.form .link a {
+  color: #333;
+}
+
+.form .link a:hover {
+  text-decoration: underline;
+}
+
+/* Users  */
+.chat {
+  padding: 25px 30px;
+}
+
+.chat header {
+  display: flex;
+  align-items: center;
+  padding-bottom: 20px;
+  justify-content: space-between;
+  /* border-bottom: 1px solid #e6e6e6; */
+}
+
+.wrapper img {
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.chat header .content {
+  display: flex;
+}
+
+.chat header .content img {
+  height: 50px;
+  width: 50px;
+}
+
+.chat header .content p {
+  font-size: 14px;
+}
+
+.chat header .details {
+  margin-left: 15px;
+}
+
+.chat header .details span {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.chat header .logout {
+  color: #fff;
+  padding: 7px 15px;
+  background: #333;
+  font-size: 17px;
+  border-radius: 5px;
+}
+
+.chat .chat-area {
+  /* background: #f4f3f3; */
+  width: 100%;
+  padding: 10px;
+}
+
+.chat .chat-area div {
+  display: flex;
+}
+
+.chat .chat-area p {
+  font-size: 13px;
+  margin-bottom: 0;
+}
+
+.chat .chat-area .message-in img {
+  height: 35px;
+  width: 35px;
+  margin-top: auto;
+  margin-right: 5px;
+}
+
+.chat .chat-area .message-in {
+  display: flex;
+  margin-bottom: 15px;
+}
+
+.chat .chat-area .message-in .message {
+  background-color: #f6f4f4;
+  border-radius: 13px 13px 13px 0px;
+}
+.chat .chat-area .convo {
+  max-width: 70%;
+  padding: 10px;
+}
+
+.chat .chat-area .message-out {
+  color: #fff;
+  background: #333;
+  border-radius: 13px 13px 0px 13px;
+  margin-left: auto;
+  margin-bottom: 15px;
+}
+
+.chat .search {
+  margin: 20px 0;
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chat .search .text {
+  font-size: 18px;
+}
+
+.chat .search input {
+  position: absolute;
+  height: 42px;
+  width: calc(100% - 50px);
+  border: 1px solid #ccc;
+  padding: 0 13px;
+  font-size: 16px;
+  border-radius: 5px;
+  outline: none;
+}
+
+.chat .search button {
+  width: 47px;
+  height: 42px;
+  border: none;
+  outline: none;
+  color: #fff;
+  background: #333;
+  cursor: pointer;
+  font-size: 17px;
+  border-radius: 0 5px 5px 0;
+}

@@ -1,0 +1,34 @@
+<body>
+    <div class="wrapper">
+        <section class="chat">
+            <header>
+                <div class="content">
+                    <img src="assets/images/irene-strong-v2aKnjMbP_k-unsplash.jpg" alt="">
+                    <div class="details">
+                        <span>Chat Room</span>
+                        <p>Active members: 12</p>
+                    </div>
+                </div>
+                <a href="" class="logout">Logout</a>
+            </header>
+            <div class="chat-area">
+                <div *ngFor="let msg of messages;">
+                    <div class="message-in" *ngIf="msg.messageIn">
+                        <img src="assets/images/irene-strong-v2aKnjMbP_k-unsplash.jpg" alt="test">
+                        <div class="message convo">
+                            <p>{{msg.data}}</p>
+                        </div>
+                    </div>
+                    <div *ngIf="!msg.messageIn" class="message-out convo">
+                        <p>{{msg.data}}</p>
+                    </div>
+                </div>
+            </div>
+            <form class="search" [formGroup]="messageFormModel" autocomplete="off" (ngSubmit)="onSendMessage()">
+                <span class="text">Select a user to stat chat</span>
+                <input type="text" placeholder="Type message here ..." formControlName="message">
+                <button type="submit"><i class="fas fa-paper-plane"></i></button>
+            </form>
+        </section>
+    </div>
+</body>
