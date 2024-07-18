@@ -27,11 +27,13 @@ namespace ChatMessageApp.Hubs
                 _shared.connections[Context.ConnectionId] = conn;
                 await Clients.All.SendAsync("ReceiveAdminUpdate", "admin", $"{conn.Username} has joined.", DateTime.Now.ToString("hh:mm tt"), _shared.connections.Count);
             }
-        }
+
+            await Clients.All.SendAsync("GetOnlineUsersData", "admin", _shared.connections.Count);
+          }
 
         public async Task SendMessage(string message)
         {
-            if (_shared.connections.TryGetValue(Context.ConnectionId, out UserConnection conn))
+            if (_shared.connections.TryGetValue(Context.ConnectionId, out  UserConnection conn))
             {
                 await Clients.GroupExcept(conn.ChatRoom, Context.ConnectionId)
                     .SendAsync("ReceiveSpecificMessage", conn.Username, message, DateTime.Now.ToString("hh:mm tt"));

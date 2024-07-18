@@ -56,7 +56,7 @@ export class ChatComponent {
         .withUrl('https://localhost:7030/chat')
         .build();
 
-      this.hubConnection.on('ReceiveAdminUpdate', (username, msg, time, onlineUsersCount) => {
+      this.hubConnection.on('ReceiveAdminUpdate', (username, msg, time) => {
         console.log('ReceiveAdminUpdate', msg);
         const message = {
           data: msg,
@@ -65,7 +65,11 @@ export class ChatComponent {
           messageIn: true
         };
         this.messages.push(message);
-        this.onlineUsersCount = onlineUsersCount;
+      });
+      
+      this.hubConnection.on('GetOnlineUsersData', (username, data) => {
+        console.log('GetOnlineUsersData', data);
+        this.onlineUsersCount = data;
       });
 
       this.hubConnection.on('ReceiveSpecificMessage', (username, msg, time) => {
