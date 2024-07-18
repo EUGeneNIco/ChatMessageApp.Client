@@ -1,4 +1,4 @@
-﻿using ChatMessageApp.DataService;
+using ChatMessageApp.DataService;
 using ChatMessageApp.Models;
 using Microsoft.AspNetCore.SignalR;
 
@@ -22,9 +22,11 @@ namespace ChatMessageApp.Hubs
         {
             await Groups.AddToGroupAsync(Context.ConnectionId, conn.ChatRoom);
 
-            _shared.connections[Context.ConnectionId] = conn;
-
-            await Clients.GroupExcept(conn.ChatRoom, Context.ConnectionId).SendAsync("ReceiveMessage", "admin", $"{conn.Username} has joined {conn.ChatRoom}");
+            if (!_shared.connections.Any(x => x.Value.Username == conn.Username))
+            {
+                _shared.connections[Context.ConnectionId] = conn;
+                await Clients.All.SendAsync("ReceiveAdminUpdate", "admin", $"{conn.Username} has joined.", DateTime.Now.ToString("hh:mm tt"), _shared.connections.Count);
+            }
         }
 
         public async Task SendMessage(string message)
@@ -32,7 +34,7 @@ namespace ChatMessageApp.Hubs
             if (_shared.connections.TryGetValue(Context.ConnectionId, out UserConnection conn))
             {
                 await Clients.GroupExcept(conn.ChatRoom, Context.ConnectionId)
-                    .SendAsync("ReceiveSpecificMessage", conn.Username, message);
+                    .SendAsync("ReceiveSpecificMessage", conn.Username, message, DateTime.Now.ToString("hh:mm tt"));
             }
         }
     }

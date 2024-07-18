@@ -155,7 +155,7 @@ body {
 .chat .chat-area {
   /* background: #f4f3f3; */
   width: 100%;
-  padding: 10px;
+  padding: 0;
 }
 
 .chat .chat-area div {
@@ -175,25 +175,47 @@ body {
 }
 
 .chat .chat-area .message-in {
-  display: flex;
-  margin-bottom: 15px;
+  display: block;
+  margin-bottom: 30px;
+  height: 40px;
 }
 
 .chat .chat-area .message-in .message {
   background-color: #f6f4f4;
   border-radius: 13px 13px 13px 0px;
 }
+
+.chat .chat-area .message-in .from {
+  font-size: 0.7rem;
+  margin-left: 3px;
+}
+
+.chat .chat-area .message-in .from span {
+  margin-left: 10px;
+}
+
 .chat .chat-area .convo {
-  max-width: 70%;
+  /* max-width: 70%; */
   padding: 10px;
+  overflow-wrap: break-word;
 }
 
 .chat .chat-area .message-out {
+  display: block;
+  height: 40px;
+  margin-left: auto;
+  margin-bottom: 30px;
+  text-align: right;
+}
+
+.chat .chat-area .message-out .from {
+  font-size: 0.7rem;
+}
+
+.chat .chat-area .message-out .message {
   color: #fff;
   background: #333;
   border-radius: 13px 13px 0px 13px;
-  margin-left: auto;
-  margin-bottom: 15px;
 }
 
 .chat .search {

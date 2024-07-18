@@ -6,6 +6,8 @@ import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 
 interface Message {
   data: string,
+  from: string,
+  time: string,
   messageIn: boolean
 }
 @Component({
@@ -22,6 +24,7 @@ export class ChatComponent {
   messages: Message[] = [];
   username: string = '';
   chatRoom: string = 'Test Chat Room';
+  onlineUsersCount: number = 0;
 
   get message() { return this.messageFormModel.get('message') };
 
@@ -53,19 +56,24 @@ export class ChatComponent {
         .withUrl('https://localhost:7030/chat')
         .build();
 
-      this.hubConnection.on('ReceiveMessage', (username, msg) => {
-        console.log('ReceiveMessage', msg);
+      this.hubConnection.on('ReceiveAdminUpdate', (username, msg, time, onlineUsersCount) => {
+        console.log('ReceiveAdminUpdate', msg);
         const message = {
-          data: `${msg} - ${username}`,
+          data: msg,
+          from: username,
+          time: time,
           messageIn: true
         };
         this.messages.push(message);
+        this.onlineUsersCount = onlineUsersCount;
       });
 
-      this.hubConnection.on('ReceiveSpecificMessage', (username, msg) => {
+      this.hubConnection.on('ReceiveSpecificMessage', (username, msg, time) => {
         console.log('ReceiveSpecificMessage', msg);
         const message = {
-          data: `${msg} - ${username}`,
+          data: msg,
+          from: username,
+          time: time,
           messageIn: true
         };
         this.messages.push(message);
@@ -92,11 +100,33 @@ export class ChatComponent {
     if (this.messageFormModel.valid) {
       this.messages.push({
         data: this.message?.value,
+        from: this.username,
+        time: this.get12HourFormat(),
         messageIn: false
       });
 
       await this.hubConnection.invoke('SendMessage', this.message?.value);
       this.messageFormModel.reset();
     }
+  }
+
+  private get12HourFormat() {
+    let date = new Date();
+
+    let hours = date.getHours();
+    let minutes = date.getMinutes();
+
+    // Check whether AM or PM
+    let newformat = hours >= 12 ? 'PM' : 'AM';
+
+    // Find current hour in AM-PM Format
+    hours = hours % 12;
+
+    // To display "0" as "12"
+    hours = hours ? hours : 12;
+    const finaMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
+    const finalHours = hours < 10 ? `0${hours}` : `${hours}`;
+
+    return `${finalHours}:${finaMinutes} ${newformat}`;
   }
 }
