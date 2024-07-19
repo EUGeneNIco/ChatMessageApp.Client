@@ -66,7 +66,7 @@ export class ChatComponent {
         };
         this.messages.push(message);
       });
-      
+
       this.hubConnection.on('GetOnlineUsersData', (username, data) => {
         console.log('GetOnlineUsersData', data);
         this.onlineUsersCount = data;
@@ -109,7 +109,7 @@ export class ChatComponent {
         messageIn: false
       });
 
-      await this.hubConnection.invoke('SendMessage', this.message?.value);
+      await this.hubConnection.invoke('SendMessage', this.message?.value, this.username);
       this.messageFormModel.reset();
     }
   }
