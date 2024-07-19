@@ -153,66 +153,57 @@ body {
 }
 
 .chat .chat-area {
-  /* background: #f4f3f3; */
-  width: 100%;
+  min-height: 50vh;
   padding: 0;
-}
-
-.chat .chat-area div {
-  display: flex;
+  gap: 10px;
 }
 
 .chat .chat-area p {
-  font-size: 13px;
+  /* font-size: 13px; */
   margin-bottom: 0;
 }
 
-.chat .chat-area .message-in img {
-  height: 35px;
-  width: 35px;
-  margin-top: auto;
-  margin-right: 5px;
-}
-
-.chat .chat-area .message-in {
-  display: block;
+.chat .chat-area .message-container {
+  max-width: 60%;
+  min-height: 40px;
   margin-bottom: 30px;
-  height: 40px;
+  overflow-wrap: break-word;
 }
 
-.chat .chat-area .message-in .message {
+.chat .chat-area .message-container p span {
+  margin-left: 20px;
+}
+
+.chat .chat-area .message-container p {
+  font-size: 0.8rem;
+}
+
+.chat .chat-area .message-container .from {
+  font-weight: 800;
+}
+
+.chat .chat-area .message-container .message {
+  padding: 10px;
+}
+
+.message-container-out {
+  margin-left: auto;
+}
+
+.time {
+  font-weight: 400;
+}
+
+.from-out {
+  text-align: right;
+}
+
+.message-in {
   background-color: #f6f4f4;
   border-radius: 13px 13px 13px 0px;
 }
 
-.chat .chat-area .message-in .from {
-  font-size: 0.7rem;
-  margin-left: 3px;
-}
-
-.chat .chat-area .message-in .from span {
-  margin-left: 10px;
-}
-
-.chat .chat-area .convo {
-  /* max-width: 70%; */
-  padding: 10px;
-  overflow-wrap: break-word;
-}
-
-.chat .chat-area .message-out {
-  display: block;
-  height: 40px;
-  margin-left: auto;
-  margin-bottom: 30px;
-  text-align: right;
-}
-
-.chat .chat-area .message-out .from {
-  font-size: 0.7rem;
-}
-
-.chat .chat-area .message-out .message {
+.message-out {
   color: #fff;
   background: #333;
   border-radius: 13px 13px 0px 13px;

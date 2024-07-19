@@ -6,23 +6,17 @@
                     <img src="assets/images/irene-strong-v2aKnjMbP_k-unsplash.jpg" alt="">
                     <div class="details">
                         <span>Chat Room</span>
-                        <p>Active members: {{onlineUsersCount}}</p>
+                        <p>Online members: {{onlineUsersCount}}</p>
                     </div>
                 </div>
-                <a href="" class="logout">Logout</a>
+                <a href="" class="logout">Leave</a>
             </header>
             <div class="chat-area">
-                <div class="chat-list" *ngFor="let msg of messages;">
-                    <div class="message-in" *ngIf="msg.messageIn">
-                        <!-- <img src="assets/images/irene-strong-v2aKnjMbP_k-unsplash.jpg" alt="test"> -->
-                        <p class="from">{{ msg.from }} <span>{{ msg.time }}</span></p>
-                        <div class="message convo">
-                            <p>{{msg.data}}</p>
-                        </div>
-                    </div>
-                    <div *ngIf="!msg.messageIn" class="message-out">
-                        <p class="from">{{ msg.time }}</p>
-                        <div class="message convo">
+                <div *ngFor="let msg of messages;">
+                    <div [ngClass]="!msg.messageIn ? 'message-container-out message-container' : 'message-container' ">
+                        <p *ngIf="msg.messageIn" class="from">{{ msg.from }} <span class="time">{{ msg.time }}</span></p>
+                        <p *ngIf="!msg.messageIn" class="from from-out">You <span class="time">{{ msg.time }}</span></p>
+                        <div class="message" [ngClass]="!msg.messageIn ? 'message-out' : 'message-in' ">
                             <p>{{msg.data}}</p>
                         </div>
                     </div>
