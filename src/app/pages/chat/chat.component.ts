@@ -108,13 +108,6 @@ export class ChatComponent {
 
   async onSendMessage() {
     if (this.messageFormModel.valid) {
-      // this.messages.push({
-      //   data: this.message?.value,
-      //   from: this.username,
-      //   time: this.get12HourFormat(),
-      //   messageIn: false
-      // });
-
       await this.hubConnection.invoke('SendMessage', this.message?.value, this.username);
       this.messageFormModel.reset();
     }
