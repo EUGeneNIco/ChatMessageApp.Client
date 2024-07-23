@@ -54,7 +54,7 @@ export class ChatComponent {
   async initHubConnection() {
     try {
       this.hubConnection = new HubConnectionBuilder()
-        .withUrl(`${environment.apiUrl}/chat`)
+        .withUrl(environment.hubUrl)
         .build();
 
       this.hubConnection.on('ReceiveAdminUpdate', (username, msg, time) => {

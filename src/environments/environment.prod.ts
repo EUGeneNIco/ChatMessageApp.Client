@@ -1,4 +1,4 @@
 export const environment = {
-	apiUrl: 'https://localhost:7030',
+	hubUrl: 'chat/',
 	production: true
 };
