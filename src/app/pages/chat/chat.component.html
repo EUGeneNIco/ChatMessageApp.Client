@@ -8,9 +8,9 @@
                         <p>Online members: {{onlineUsersCount}}</p>
                     </div>
                 </div>
-                <a href="" class="logout">Leave</a>
+                <a (click)="leaveChatRoom()" class="logout">Leave</a>
             </header>
-            <div class="chat-area">
+            <div class="chat-area" #scrollMe [scrollTop]="scrollMe.scrollHeight">
                 <div *ngFor="let msg of messages;">
                     <div [ngClass]="!msg.messageIn ? 'message-container-out message-container' : 'message-container' ">
                         <p *ngIf="msg.messageIn" class="from">{{ msg.from }}, {{ msg.time }}</p>

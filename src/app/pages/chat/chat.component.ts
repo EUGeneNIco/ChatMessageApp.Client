@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 import { environment } from '../../../environment/environment';
 
@@ -30,6 +30,7 @@ export class ChatComponent {
   get message() { return this.messageFormModel.get('message') };
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private fb: FormBuilder
   ) {
@@ -79,7 +80,7 @@ export class ChatComponent {
           data: msg,
           from: username,
           time: time,
-          messageIn: true
+          messageIn: username !== this.username
         };
         this.messages.push(message);
       });
@@ -96,19 +97,23 @@ export class ChatComponent {
       console.log('error connecting to hub: ', error);
     }
   }
-
   async joinChatRoom() {
     await this.hubConnection.invoke('JoinSpecificChatRoom', { 'username': this.username, 'chatRoom': this.chatRoom });
   }
 
+  async leaveChatRoom() {
+    this.router.navigateByUrl('');
+    await this.hubConnection.invoke('LeaveChatRoom', { 'username': this.username, 'chatRoom': this.chatRoom });
+  }
+
   async onSendMessage() {
     if (this.messageFormModel.valid) {
-      this.messages.push({
-        data: this.message?.value,
-        from: this.username,
-        time: this.get12HourFormat(),
-        messageIn: false
-      });
+      // this.messages.push({
+      //   data: this.message?.value,
+      //   from: this.username,
+      //   time: this.get12HourFormat(),
+      //   messageIn: false
+      // });
 
       await this.hubConnection.invoke('SendMessage', this.message?.value, this.username);
       this.messageFormModel.reset();

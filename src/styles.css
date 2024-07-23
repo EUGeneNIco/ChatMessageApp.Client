@@ -142,6 +142,7 @@ body {
   background-color: #8754b0;
   font-size: 17px;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 .chat .chat-area {
