@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, RouterOutlet } from '@angular/router';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
-import { environment } from '../../../environments/environment';
+import { environment } from '../../../environment/environment';
 
 interface Message {
   data: string,
@@ -55,7 +55,6 @@ export class ChatComponent {
     try {
       this.hubConnection = new HubConnectionBuilder()
         .withUrl(environment.hubUrl)
-        // .withUrl('chat/')
         .build();
 
       this.hubConnection.on('ReceiveAdminUpdate', (username, msg, time) => {
