@@ -5,7 +5,7 @@
                 <div class="content">
                     <img src="assets/images/irene-strong-v2aKnjMbP_k-unsplash.jpg" alt="">
                     <div class="details">
-                        <span>Chat Room</span>
+                        <span>Simple Chat Room</span>
                         <p>Online members: {{onlineUsersCount}}</p>
                     </div>
                 </div>
@@ -14,8 +14,8 @@
             <div class="chat-area">
                 <div *ngFor="let msg of messages;">
                     <div [ngClass]="!msg.messageIn ? 'message-container-out message-container' : 'message-container' ">
-                        <p *ngIf="msg.messageIn" class="from">{{ msg.from }} <span class="time">{{ msg.time }}</span></p>
-                        <p *ngIf="!msg.messageIn" class="from from-out">You <span class="time">{{ msg.time }}</span></p>
+                        <p *ngIf="msg.messageIn" class="from">{{ msg.from }}, {{ msg.time }}</p>
+                        <p *ngIf="!msg.messageIn" class="from from-out">{{ msg.time }}</p>
                         <div class="message" [ngClass]="!msg.messageIn ? 'message-out' : 'message-in' ">
                             <p>{{msg.data}}</p>
                         </div>
@@ -23,7 +23,7 @@
                 </div>
             </div>
             <form class="search" [formGroup]="messageFormModel" autocomplete="off" (ngSubmit)="onSendMessage()">
-                <span class="text">Select a user to stat chat</span>
+                <span class="text"></span>
                 <input type="text" placeholder="Type message here ..." formControlName="message">
                 <button type="submit"><i class="fas fa-paper-plane"></i></button>
             </form>

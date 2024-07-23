@@ -54,13 +54,6 @@ body {
   margin-bottom: 10px;
 }
 
-.form form .input input {
-  height: 40px;
-  width: 100%;
-  font-size: 16px;
-  padding: 0 10px;
-}
-
 .form form .field label {
   margin-bottom: 2px;
 }
@@ -114,7 +107,6 @@ body {
   align-items: center;
   padding-bottom: 20px;
   justify-content: space-between;
-  /* border-bottom: 1px solid #e6e6e6; */
 }
 
 .wrapper img {
@@ -176,10 +168,6 @@ body {
 
 .chat .chat-area .message-container p {
   font-size: 0.8rem;
-}
-
-.chat .chat-area .message-container .from {
-  font-weight: 800;
 }
 
 .chat .chat-area .message-container .message {

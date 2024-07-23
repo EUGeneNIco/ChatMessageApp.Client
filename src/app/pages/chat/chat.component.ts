@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, RouterOutlet } from '@angular/router';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
+import { environment } from '../../../environments/environment';
 
 interface Message {
   data: string,
@@ -53,11 +54,11 @@ export class ChatComponent {
   async initHubConnection() {
     try {
       this.hubConnection = new HubConnectionBuilder()
-        .withUrl('https://localhost:7030/chat')
+        .withUrl(`${environment.apiUrl}/chat`)
         .build();
 
       this.hubConnection.on('ReceiveAdminUpdate', (username, msg, time) => {
-        console.log('ReceiveAdminUpdate', msg);
+        // console.log('ReceiveAdminUpdate', msg);
         const message = {
           data: msg,
           from: username,
@@ -68,12 +69,12 @@ export class ChatComponent {
       });
 
       this.hubConnection.on('GetOnlineUsersData', (username, data) => {
-        console.log('GetOnlineUsersData', data);
+        // console.log('GetOnlineUsersData', data);
         this.onlineUsersCount = data;
       });
 
       this.hubConnection.on('ReceiveSpecificMessage', (username, msg, time) => {
-        console.log('ReceiveSpecificMessage', msg);
+        // console.log('ReceiveSpecificMessage', msg);
         const message = {
           data: msg,
           from: username,
