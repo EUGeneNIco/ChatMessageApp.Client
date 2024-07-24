@@ -14,16 +14,20 @@
                 <div *ngFor="let msg of messages;">
                     <div [ngClass]="!msg.messageIn ? 'message-container-out message-container' : 'message-container' ">
                         <p *ngIf="msg.messageIn" class="from">{{ msg.from }}, {{ msg.time }}</p>
-                        <p *ngIf="!msg.messageIn" class="from from-out">{{ msg.time }}</p>
+                        <p *ngIf="!msg.messageIn" class="from from-out">You, {{ msg.time }}</p>
                         <div class="message" [ngClass]="!msg.messageIn ? 'message-out' : 'message-in' ">
                             <p>{{msg.data}}</p>
                         </div>
                     </div>
                 </div>
             </div>
+            <div *ngIf="genericMessages.length > 0" class="gen-chat">
+                <p>{{displayChattingMessage()}}</p>
+            </div>
             <form class="search" [formGroup]="messageFormModel" autocomplete="off" (ngSubmit)="onSendMessage()">
                 <span class="text"></span>
-                <input type="text" placeholder="Type message here ..." formControlName="message">
+                <input (focusin)="startChatting()" (focusout)="stopChatting()" type="text"
+                    placeholder="Type message here ..." formControlName="message">
                 <button type="submit"><i class="fas fa-paper-plane"></i></button>
             </form>
         </section>

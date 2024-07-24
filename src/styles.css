@@ -1,5 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
 
+:root {
+  --primary: #00ABE4;
+  --secondary: #1883a7;
+  --tertiary: #cac5c5;
+  --bg: #fbfbfb;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -17,8 +24,8 @@ body {
 }
 
 .wrapper {
-  background: #fff;
-  width: 400px;
+  background-color: var(--bg);
+  width: 380px;
   border-radius: 16px;
   box-shadow: 0 0 128px 0 rgba (0, 0, 0.1), 0 32px 64px -48px rgba(0, 0, 0.5);
 }
@@ -77,7 +84,7 @@ body {
   border: none;
   font-size: 17px;
   font-weight: 500;
-  background-color: #8754b0;
+  background-color: var(--primary);
   color: #fff;
   border-radius: 5px;
   cursor: pointer;
@@ -97,7 +104,6 @@ body {
   text-decoration: underline;
 }
 
-/* Users  */
 .chat {
   padding: 25px 30px;
 }
@@ -139,13 +145,14 @@ body {
 .chat header .logout {
   color: #fff;
   padding: 7px 15px;
-  background-color: #8754b0;
+  background-color: var(--primary);
   font-size: 17px;
   border-radius: 5px;
   cursor: pointer;
 }
 
 .chat .chat-area {
+  position: relative;
   min-height: 50vh;
   padding: 0;
   overflow-y: auto;
@@ -188,22 +195,38 @@ body {
 }
 
 .message-in {
-  background-color: #f6f4f4;
-  border-radius: 13px 13px 13px 0px;
+  color: #fff;
+  background-color: var(--secondary);
+  border-radius: 10px 10px 10px 0px;
 }
 
 .message-out {
   color: #fff;
-  background-color: #8754b0;
-  border-radius: 13px 13px 0px 13px;
+  background-color: var(--primary);
+  border-radius: 10px 10px 0px 10px;
 }
 
 .chat .search {
-  margin: 20px 0;
+  margin: 15px 0 0;
   display: flex;
   position: relative;
   align-items: center;
   justify-content: space-between;
+  position: relative;
+}
+
+.chat .gen-chat {
+  width: 60%;
+  height: 2rem;
+  padding: 6px 10px;
+  color: var(--primary);
+  background-color: #f3f2f2;
+  border-radius: 20px;
+}
+
+.chat .gen-chat p {
+  font-size: 0.8rem;
+  margin: 0;
 }
 
 .chat .search .text {
@@ -227,7 +250,7 @@ body {
   border: none;
   outline: none;
   color: #fff;
-  background: #8754b0;
+  background-color: var(--primary);
   cursor: pointer;
   font-size: 17px;
   border-radius: 0 5px 5px 0;

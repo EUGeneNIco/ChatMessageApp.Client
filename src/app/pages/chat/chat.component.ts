@@ -9,8 +9,14 @@ interface Message {
   data: string,
   from: string,
   time: string,
-  messageIn: boolean
+  messageIn: boolean,
 }
+
+interface GenericMessage {
+  key: string,
+  value: string,
+}
+
 @Component({
   selector: 'app-chat',
   standalone: true,
@@ -23,6 +29,7 @@ export class ChatComponent {
   messageFormModel!: FormGroup;
 
   messages: Message[] = [];
+  genericMessages: GenericMessage[] = [];
   username: string = '';
   chatRoom: string = 'Test Chat Room';
   onlineUsersCount: number = 0;
@@ -41,6 +48,8 @@ export class ChatComponent {
       }
     })
 
+    // this.genericMessages.push({ key: 'Berto', value: 'Berto' });
+    
     this.initForm();
     this.initHubConnection();
   }
@@ -72,6 +81,27 @@ export class ChatComponent {
       this.hubConnection.on('GetOnlineUsersData', (username, data) => {
         // console.log('GetOnlineUsersData', data);
         this.onlineUsersCount = data;
+      });
+
+      this.hubConnection.on('SomeoneIsChatting', (username, data) => {
+        // console.log('SomeoneIsChatting', `${username} ${data}`);
+
+        if (data) {
+          if (username !== this.username) {
+            const message = {
+              key: username,
+              value: username
+            };
+
+            this.genericMessages.push(message);
+          }
+        }
+        else {
+          const message = this.genericMessages.find(x => x.key === username);
+          if (message) {
+            this.genericMessages = this.genericMessages.filter(x => x.key !== username);
+          }
+        }
       });
 
       this.hubConnection.on('ReceiveSpecificMessage', (username, msg, time) => {
@@ -111,6 +141,22 @@ export class ChatComponent {
       await this.hubConnection.invoke('SendMessage', this.message?.value, this.username);
       this.messageFormModel.reset();
     }
+  }
+
+  async startChatting() {
+    // console.log('Started chatting...')
+    await this.hubConnection.invoke('SendChattingAction', this.username, true);
+  }
+
+  async stopChatting() {
+    // console.log('Stop chatting...')
+    await this.hubConnection.invoke('SendChattingAction', this.username, false);
+  }
+
+  displayChattingMessage() {
+    return this.genericMessages.length === 1
+      ? `${this.genericMessages[0].value} is typing...`
+      : `${this.genericMessages.length} members are typing...`;
   }
 
   private get12HourFormat() {

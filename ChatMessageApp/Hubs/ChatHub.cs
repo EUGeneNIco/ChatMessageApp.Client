@@ -84,5 +84,26 @@ namespace ChatMessageApp.Hubs
         }
       }
     }
+
+    public async Task SendChattingAction(string username, bool hasStarted)
+    {
+      if (_shared.connections.TryGetValue(Context.ConnectionId, out UserConnection conn))
+      {
+        await Clients.GroupExcept(conn.ChatRoom, Context.ConnectionId)
+            .SendAsync("SomeoneIsChatting", conn.Username, hasStarted);
+      }
+      else
+      {
+        var hasSameNameConnectionRecord = _shared.connections.Any(x => x.Value.Username == username);
+
+        if (hasSameNameConnectionRecord)
+        {
+          var connection = _shared.connections.FirstOrDefault(x => x.Value.Username == username);
+
+          await Clients.GroupExcept(connection.Value.ChatRoom, connection.Key)
+              .SendAsync("SomeoneIsChatting", connection.Value.Username, hasStarted);
+        }
+      }
+    }
   }
 }
