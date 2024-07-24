@@ -8,14 +8,15 @@
                         <p>Online members: {{onlineUsersCount}}</p>
                     </div>
                 </div>
-                <a (click)="leaveChatRoom()" class="logout">Leave</a>
+                <a (click)="leaveChatRoom()" class="logout"><i class="fas fa-door-open"></i></a>
             </header>
             <div class="chat-area" #scrollMe [scrollTop]="scrollMe.scrollHeight">
                 <div *ngFor="let msg of messages;">
                     <div [ngClass]="!msg.messageIn ? 'message-container-out message-container' : 'message-container' ">
                         <p *ngIf="msg.messageIn" class="from">{{ msg.from }}, {{ msg.time }}</p>
                         <p *ngIf="!msg.messageIn" class="from from-out">You, {{ msg.time }}</p>
-                        <div class="message" [ngClass]="!msg.messageIn ? 'message-out' : 'message-in' ">
+                        <div class="message" [ngClass]="!msg.messageIn ? 'message-out' : 'message-in' "
+                            [ngStyle]="msg.from === 'admin' ? {color: 'var(--primary)', 'background-color': '#f3f2f2'} : {}">
                             <p>{{msg.data}}</p>
                         </div>
                     </div>

@@ -34,7 +34,7 @@ export class RegistrationComponent {
   }
 
   async onSubmit() {
-    if (this.formModel.valid) {
+    if (this.formModel.valid && this.username?.value !== 'admin') {
       // go to chat
       this.router.navigateByUrl('chat/' + this.username?.value);
     }
